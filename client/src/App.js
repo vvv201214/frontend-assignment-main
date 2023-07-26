@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [symbol, setSymbol] = useState('');
-  const [date, setDate] = useState('');
+  const [symbol, setSymbol] = useState('AAPL');
+  const [date, setDate] = useState('2023-07-24');
   const [stockData, setStockData] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(()=>{
+	handleSubmit();
+  }, [])
 
+  const handleSubmit = async (e) => {
+    e && e.preventDefault();
     // Prepare the request body
     const requestBody = {
       symbol: symbol,
@@ -26,11 +29,13 @@ function App() {
       });
 
       if (!response.ok) {
+		setStockData({});
         throw new Error('Network response was not ok');
       }
 
       // server response
       const stockData = await response.json();
+	  console.log(stockData)
 	  setStockData(stockData.data);
     } catch (error) {
       console.error('Error:', error);
