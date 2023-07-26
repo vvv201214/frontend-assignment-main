@@ -35,7 +35,6 @@ function App() {
 
       // server response
       const stockData = await response.json();
-	  console.log(stockData)
 	  setStockData(stockData.data);
     } catch (error) {
       console.error('Error:', error);
