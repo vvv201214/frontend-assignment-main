@@ -29,16 +29,14 @@ function App() {
         throw new Error('Network response was not ok');
       }
 
-      // The server should send the stock data back as the response
+      // server response
       const stockData = await response.json();
 	  setStockData(stockData.data);
-      console.log('Stock Data:', stockData);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  console.log(stockData)
   return (
     <div className="container">
       <h1>Stock Data Form</h1>

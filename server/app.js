@@ -34,15 +34,13 @@ app.post('/api/fetchStockData', async (req, res) => {
     const apiUrl = `https://api.polygon.io/v1/open-close/${symbol}/${date}?adjusted=true&apiKey=7GXhBRsptq9gxVoY3rzRTITOUeX86ycc`;
     try{
         // Fetch data from the API
-        const data = await fetch(apiUrl);
-        const stockData = await data.json();
-        console.log(stockData)
+        const stockData = await axios.get(apiUrl);
         let obj = {
-            Open: stockData.open,
-            High: stockData.high, 
-            Low: stockData.low, 
-            Close: stockData.close, 
-            Volume: stockData.volume
+            Open: stockData.data.open,
+            High: stockData.data.high, 
+            Low: stockData.data.low, 
+            Close: stockData.data.close, 
+            Volume: stockData.data.volume
         }
         res.status(200).json({status: "success", data: obj});
     } catch(err){
