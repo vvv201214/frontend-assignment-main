@@ -14,7 +14,7 @@ function App() {
     e && e.preventDefault();
     // Prepare the request body
     const requestBody = {
-      symbol: symbol,
+      symbol: symbol?.toUpperCase(),
       date: date,
     };
 
